@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 // Given by user
 interface TicketAttributes {
-  name: string;
+  title: string;
   price: number;
   userId?: string;
 }
@@ -40,6 +40,7 @@ const ticketSchema = new mongoose.Schema(
       transform(doc, ret) {
         ret.id = ret._id;
         delete ret._id;
+        delete ret.userId;
       },
     },
   }
