@@ -30,9 +30,17 @@ const ticketSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    number: {
+      type: Number,
+      default: 1,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now(),
+    },
     userId: {
-      type: [String],
-      required: false,
+      type: String,
+      required: true,
     },
   },
   {
@@ -40,7 +48,7 @@ const ticketSchema = new mongoose.Schema(
       transform(doc, ret) {
         ret.id = ret._id;
         delete ret._id;
-        delete ret.userId;
+        // delete ret.userId;
       },
     },
   }
