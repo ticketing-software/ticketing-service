@@ -10,6 +10,7 @@ app.use(json());
 
 app.use(ticketRoute);
 
+// Looks out for unspecified routes
 app.all("*", (request: Request) => {
   throw new PathNotFoundException("Given Path Not found", request.path);
 });
