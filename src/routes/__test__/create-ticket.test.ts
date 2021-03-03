@@ -57,7 +57,6 @@ test("Testing Creation of Ticket with User Cookie and without title", async () =
     .send({ price: 20.0 })
     .expect(400);
 });
-// Manual Commit Message
 
 test("Testing Creation of Ticket with User Cookie and without price", async () => {
   const payload = {
