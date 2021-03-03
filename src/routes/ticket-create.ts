@@ -7,7 +7,7 @@ import { Ticket } from "../models/ticket";
 const route = Router();
 
 route.post(
-  "/api/tickets",
+  "/api/ticket",
   [
     body("title").not().isEmpty().withMessage("Title is required"),
     body("price")

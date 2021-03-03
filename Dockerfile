@@ -8,7 +8,7 @@ WORKDIR /app
 
 COPY package*.json .
 
-RUN npm install --prod
+RUN npm install --only=prod
 
 COPY . .
 

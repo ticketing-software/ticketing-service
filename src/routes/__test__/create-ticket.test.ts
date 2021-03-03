@@ -4,18 +4,18 @@ import jwt from "jsonwebtoken";
 
 test("Testing Creation of Ticket with User Cookie", async () => {
   await request(app)
-    .post("/api/tickets")
+    .post("/api/ticket")
     .send({ title: "Some Custom Title", price: 20.0 })
     .expect(403);
 });
 
 test("Creation of Ticket with User Cookie and title", async () => {
-  await request(app).post("/api/tickets").send({ price: 20.0 }).expect(400);
+  await request(app).post("/api/ticket").send({ price: 20.0 }).expect(400);
 });
 
 test("Testing Creation of Ticket with User Cookie and price", async () => {
   await request(app)
-    .post("/api/tickets")
+    .post("/api/ticket")
     .send({ title: "Some Custom Title" })
     .expect(400);
 });
@@ -33,7 +33,7 @@ test("Testing Creation of Ticket with User Cookie", async () => {
   console.log(createdCookie);
 
   await request(app)
-    .post("/api/tickets")
+    .post("/api/ticket")
     .set("Cookie", createdCookie)
     .send({ title: "Some Custom Title", price: 20.0 })
     .expect(201);
@@ -52,7 +52,7 @@ test("Testing Creation of Ticket with User Cookie and without title", async () =
   console.log(createdCookie);
 
   await request(app)
-    .post("/api/tickets")
+    .post("/api/ticket")
     .set("Cookie", createdCookie)
     .send({ price: 20.0 })
     .expect(400);
@@ -71,7 +71,7 @@ test("Testing Creation of Ticket with User Cookie and without price", async () =
   console.log(createdCookie);
 
   await request(app)
-    .post("/api/tickets")
+    .post("/api/ticket")
     .set("Cookie", createdCookie)
     .send({ title: "Some Custom Title" })
     .expect(400);
