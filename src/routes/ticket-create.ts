@@ -7,7 +7,7 @@ import { Ticket } from "../models/ticket";
 const route = Router();
 
 route.post(
-  "/api/ticket",
+  "/api/tickets",
   [
     body("title").not().isEmpty().withMessage("Title is required"),
     body("price")
@@ -23,7 +23,7 @@ route.post(
 
     if (payload) {
       const ticket = Ticket.build({ title, price, userId: payload.id });
-      response.send({ ticket });
+      response.status(201).send({ ticket });
     } else {
       response.send({ message: "Didn't Receive Cookie" });
     }

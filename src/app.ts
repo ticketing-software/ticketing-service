@@ -1,7 +1,7 @@
 import express from "express";
 import { json } from "body-parser";
 import { errorHandler } from "./middlewares/error-handling-middleware";
-import { ticketRoute } from "./routes/test-route";
+import { ticketRoute } from "./routes/ticket-create";
 
 const app = express();
 

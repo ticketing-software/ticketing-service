@@ -8,10 +8,10 @@ function errorHandler(
   next: NextFunction
 ) {
   if (error instanceof CustomError) {
-    return response.status(error.statusCode).send(error.message);
+    return response
+      .status(error.statusCode)
+      .send({ errors: error.serializeErrors() });
   }
-
-  console.log(error);
 
   response.status(400).send({
     errors: [{ message: "Something Went Wrong" }],

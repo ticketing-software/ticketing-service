@@ -9,7 +9,7 @@ function validationRequest(
   const errors = validationResult(request);
 
   if (!errors.isEmpty()) {
-    response.send({ error: errors.array() });
+    response.status(400).send({ error: errors.array() });
   } else {
     next();
   }
