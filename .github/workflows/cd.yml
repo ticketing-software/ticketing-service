@@ -62,7 +62,7 @@ jobs:
       - run: |
           az aks get-credentials --resource-group Ticketing_Software --name kubernetes-cluster
       - name: Restarting the Cluster
-        run: kubectl rollout restart deployment auth
+        run: kubectl rollout restart deployment ticketing-service-deployment
         
         
         
