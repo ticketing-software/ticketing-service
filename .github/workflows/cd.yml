@@ -47,6 +47,28 @@ jobs:
             DB=${{ secrets.DB_CONNECT }}
       - name: Image Digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+        
+        
+  Azure-Kubernetes-Cluster:
+    runs-on: ubuntu-latest
+
+    needs: Docker-Push
+
+    steps:
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - run: |
+          az aks get-credentials --resource-group Ticketing_Software --name kubernetes-cluster
+      - name: Restarting the Cluster
+        run: kubectl rollout restart deployment auth
+        
+        
+        
+        
+        
+        
           
           
           
