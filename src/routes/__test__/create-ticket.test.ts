@@ -30,8 +30,6 @@ test("Testing Creation of Ticket with User Cookie", async () => {
 
   const createdCookie = `user=${token}`;
 
-  console.log(createdCookie);
-
   await request(app)
     .post("/api/ticket")
     .set("Cookie", createdCookie)
@@ -49,8 +47,6 @@ test("Testing Creation of Ticket with User Cookie and without title", async () =
 
   const createdCookie = `user=${token}`;
 
-  console.log(createdCookie);
-
   await request(app)
     .post("/api/ticket")
     .set("Cookie", createdCookie)
@@ -67,8 +63,6 @@ test("Testing Creation of Ticket with User Cookie and without price", async () =
   const token = jwt.sign(payload, "asdf");
 
   const createdCookie = `user=${token}`;
-
-  console.log(createdCookie);
 
   await request(app)
     .post("/api/ticket")
