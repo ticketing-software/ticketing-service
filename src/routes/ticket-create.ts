@@ -23,6 +23,9 @@ route.post(
 
     if (payload) {
       const ticket = Ticket.build({ title, price, userId: payload.id });
+      // const ticket = new Ticket({ title, price, userId: payload.id });
+      ticket.save();
+
       response.status(201).send({ ticket });
     } else {
       response.send({ message: "Didn't Receive Cookie" });
