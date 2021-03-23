@@ -8,6 +8,7 @@ const route = Router();
 
 route.post(
   "/api/ticket",
+  checkUser,
   [
     body("title").not().isEmpty().withMessage("Title is required"),
     body("price")
@@ -15,7 +16,6 @@ route.post(
       .withMessage("Price Must be greater than zero"),
   ],
   validationRequest,
-  checkUser,
   (request: Request, response: Response) => {
     const { title, price } = request.body;
 
