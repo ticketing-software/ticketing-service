@@ -9,7 +9,8 @@ router.get("/api/tickets/:id", async (request: Request, response: Response) => {
   const ticket = await Ticket.findById(request.params.id);
 
   if (!ticket) {
-    throw new NotFoundError("Ticket Not Found");
+    // throw new NotFoundError("Ticket Not Found");
+    response.status(404).send({ message: "Ticket Not found for given id" });
   }
 
   response.send(ticket);

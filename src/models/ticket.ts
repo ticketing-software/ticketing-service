@@ -1,11 +1,10 @@
-import { Mongoose } from "mongoose";
 import mongoose from "mongoose";
 
 // Given by user
 interface TicketAttributes {
   title: string;
   price: number;
-  userId?: string;
+  userId: string;
 }
 
 // What attributes does Ticket Model have
@@ -29,10 +28,6 @@ const ticketSchema = new mongoose.Schema(
     price: {
       type: Number,
       required: true,
-    },
-    number: {
-      type: Number,
-      default: 1,
     },
     createdAt: {
       type: Date,
