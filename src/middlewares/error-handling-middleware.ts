@@ -7,6 +7,8 @@ function errorHandler(
   response: Response,
   next: NextFunction
 ) {
+  console.log("Inside Error Handler");
+
   if (error instanceof CustomError) {
     return response
       .status(error.statusCode)

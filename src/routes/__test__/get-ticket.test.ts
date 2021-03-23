@@ -3,10 +3,13 @@ import { app } from "../../app";
 import jwt from "jsonwebtoken";
 import { Ticket } from "../../models/ticket";
 
-// test("Returns a 404 if ticket is not found", async () => {
-//   const response = await request(app).get("/api/tickets/uiohsihef").send();
-//   // console.log(response.body);
-// });
+test("Returns a 404 if ticket is not found", async () => {
+  const response = await request(app)
+    .get("/api/tickets/60598d86c480c60024e40be2")
+    .send();
+
+  console.log(response.body);
+});
 
 test("Returns the ticket if the ticket is found", async () => {
   const ticketName = "Custom";
