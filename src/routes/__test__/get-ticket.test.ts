@@ -9,6 +9,9 @@ import { Ticket } from "../../models/ticket";
 // });
 
 test("Returns the ticket if the ticket is found", async () => {
+  const ticketName = "Custom";
+  const thePrice = 20.0;
+
   const payload = {
     id: "asaeoih",
     email: "test@test.com",
@@ -21,16 +24,13 @@ test("Returns the ticket if the ticket is found", async () => {
   const response = await request(app)
     .post("/api/ticket")
     .set("Cookie", createdCookie)
-    .send({ title: "Some Custom Title", price: 20.0 })
+    .send({ title: ticketName, price: thePrice })
     .expect(201);
-
-  console.log(response.body);
 
   const ticketResponse = await request(app)
     .get(`/api/tickets/${response.body.ticket.id}`)
-    .send()
-    .expect(200);
+    .send();
 
-  expect(ticketResponse.body.title).toEqual("Some Custom Title");
-  expect(ticketResponse.body.price).toEqual(20.0);
+  expect(ticketResponse.body.title).toEqual(ticketName);
+  expect(ticketResponse.body.price).toEqual(thePrice);
 });
