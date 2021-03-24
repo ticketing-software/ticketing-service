@@ -1,12 +1,12 @@
 import { CustomError } from "./custom-error";
 
-class NotFoundError extends CustomError {
+class TicketNotFoundError extends CustomError {
   statusCode = 404;
 
   constructor(public message: string) {
     super(message);
 
-    Object.setPrototypeOf(this, NotFoundError.prototype);
+    Object.setPrototypeOf(this, TicketNotFoundError.prototype);
   }
 
   serializeErrors() {
@@ -18,4 +18,4 @@ class NotFoundError extends CustomError {
   }
 }
 
-export default NotFoundError;
+export default TicketNotFoundError;

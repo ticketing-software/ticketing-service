@@ -4,9 +4,7 @@ import jwt from "jsonwebtoken";
 import { Ticket } from "../../models/ticket";
 
 test("Returns a 404 if ticket is not found", async () => {
-  const response = await request(app)
-    .get("/api/tickets/60598d86c480c60024e40be2")
-    .send();
+  const response = await request(app).get("/api/tickets/uefhasliec").send();
 
   console.log(response.body);
 });

@@ -1,5 +1,6 @@
 import express, { Request } from "express";
 import { json } from "body-parser";
+import "express-async-errors";
 import { errorHandler } from "./middlewares/error-handling-middleware";
 import { ticketRoute } from "./routes/ticket-create";
 import { PathNotFoundException } from "./errors/path-not-found-error";
