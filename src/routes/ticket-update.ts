@@ -26,10 +26,15 @@ route.put(
     }
 
     if (ticket.userId !== request.currentUser.id) {
-      console.log("This is not Authorized");
-
       throw new NotAuthorizedError("User Not Authorized");
     }
+
+    ticket.set({
+      title: request.body.title,
+      price: request.body.price,
+    });
+
+    await ticket.save();
 
     response.send(ticket);
   }

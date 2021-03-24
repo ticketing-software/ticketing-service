@@ -59,8 +59,6 @@ test("Returns a 401 if user doesn't own the ticket", async () => {
 
   //   Creating another user and trying to update
 
-  console.log(response1.body);
-
   const payload2 = {
     id: "ashefuhoiawde",
     email: "test@test.com",
@@ -133,12 +131,23 @@ test("Should update the ticket provided valid inputs ", async () => {
     .send({ title: "Some Custom Title", price: 20.0 })
     .expect(201);
 
-  await request(app)
+  const updateResponse2 = await request(app)
     .put(`/api/tickets/${response.body.ticket.id}`)
     .set("Cookie", createdCookie)
     .send({
       title: "Updated by another user",
-      price: "300.23",
+      price: 300.23,
     })
     .expect(200);
+
+  expect(updateResponse2.body.title).toEqual("Updated by another user");
+  expect(updateResponse2.body.price).toEqual(300.23);
+
+  const getResponse = await request(app)
+    .get(`/api/tickets/${updateResponse2.body.id}`)
+    // .set("Cookie", createdCookie)
+    .expect(200);
+
+  expect(getResponse.body.title).toEqual("Updated by another user");
+  expect(getResponse.body.price).toEqual(300.23);
 });
