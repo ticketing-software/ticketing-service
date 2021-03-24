@@ -7,13 +7,13 @@ function errorHandler(
   response: Response,
   next: NextFunction
 ) {
-  console.log("Inside Error Handler");
-
   if (error instanceof CustomError) {
     return response
       .status(error.statusCode)
       .send({ errors: error.serializeErrors() });
   }
+
+  console.error(error);
 
   response.status(400).send({
     errors: [{ message: "Something Went Wrong" }],
