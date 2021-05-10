@@ -3,6 +3,8 @@ import { body } from "express-validator";
 import { validationRequest } from "../middlewares/validate-request";
 import { checkUser } from "../middlewares/check-current-user";
 import { Ticket } from "../models/ticket";
+import { TicketCreatedPublisher } from "../events/publishers/ticket-created-publisher";
+import { natsWrapper } from "../nats-wrapper";
 
 const route = Router();
 
@@ -16,7 +18,7 @@ route.post(
       .withMessage("Price Must be greater than zero"),
   ],
   validationRequest,
-  (request: Request, response: Response) => {
+  async (request: Request, response: Response) => {
     const { title, price } = request.body;
 
     const payload = request.currentUser;
@@ -24,7 +26,14 @@ route.post(
     if (payload) {
       const ticket = Ticket.build({ title, price, userId: payload.id });
       // const ticket = new Ticket({ title, price, userId: payload.id });
-      ticket.save();
+      await ticket.save();
+
+      new TicketCreatedPublisher(natsWrapper.client).publish({
+        id: ticket.id,
+        title: ticket.title,
+        price: ticket.price,
+        userId: ticket.userId,
+      });
 
       response.status(201).send({ ticket });
     } else {
