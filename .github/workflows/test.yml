@@ -33,6 +33,6 @@ jobs:
       - name: Building Node Packages
         run: npm install
         
-      - name: Testing the code
-        run: npm run test:ci        
+#       - name: Testing the code
+#         run: npm run test:ci        
                 
